@@ -1,0 +1,26 @@
+name: Daily File Update
+
+on:
+  schedule:
+    # Runs at 00:00 UTC every day
+    - cron: '0 0 * * *'
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run the update script
+      run: |
+        python your_script.py
+
+    - name: Commit changes
+      run: |
+        git config --global user.name "SwaroopSRP"
+        git config --global user.email "srp31.swaroop@gmail.com"
+        git add your_file.txt
+        git commit -m "Automated 30sec update"
+        git push
